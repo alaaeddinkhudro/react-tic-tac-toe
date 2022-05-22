@@ -1,10 +1,21 @@
-import React from 'react'
+import React,{ useEffect, useState } from 'react'
 import Square from './Square';
 
 const Board = () => {
     const status = 'Next player: X';
+    const [round , setReound] = useState('X');
+    const [squaresStatus , setSquaresStatus] = useState(Array(9).fill(null));
     const renderSquare = (i) => {
-        return <Square /> ;
+        return <Square onClick={handelSquareClick} index={i} value={squaresStatus[i]}/> ;
+    }
+  
+
+    const handelSquareClick = (index) => {
+        setReound(round === 'X'? 'O':'X')
+
+        let newSquaresStatus = {...squaresStatus}
+        newSquaresStatus[index] = round
+        setSquaresStatus({...newSquaresStatus})
     }
 
     return ( <div>
